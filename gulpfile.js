@@ -115,6 +115,9 @@ var paths = {
             "src/js/fields/advanced/URLField.js",
             "src/js/fields/advanced/ZipcodeField.js",
 
+            //DigitalHeritage specific fields
+            "src/js/fields/digitalheritage/GeoreferenceField.js",
+
             // base view
             "src/js/views/base.js",
 
