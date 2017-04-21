@@ -22,3 +22,4 @@ _old/
 deploy.log
 
 package.json.npm
+.DS_Store
