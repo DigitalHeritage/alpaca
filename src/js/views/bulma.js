@@ -23,15 +23,15 @@
 
     // custom styles
     var styles = {};
-    styles["button"] = "btn btn-default";
-    styles["smallButton"] = "btn btn-default btn-sm";
-    styles["addIcon"] = "glyphicon glyphicon-plus-sign";
-    styles["removeIcon"] = "glyphicon glyphicon-minus-sign";
-    styles["upIcon"] = "glyphicon glyphicon-chevron-up";
-    styles["downIcon"] = "glyphicon glyphicon-chevron-down";
-    styles["expandedIcon"] = "glyphicon glyphicon-circle-arrow-down";
-    styles["collapsedIcon"] = "glyphicon glyphicon-circle-arrow-right";
-    styles["table"] = "table table-striped table-bordered table-hover";
+    styles["button"] = "button is-light";
+    styles["smallButton"] = "button is-light is-small";
+    styles["addIcon"] = "fas fa-plus";
+    styles["removeIcon"] = "fas fa-minus";
+    styles["upIcon"] = "fas fa-arrow-up";
+    styles["downIcon"] = "fas fa-arrow-down";
+    styles["expandedIcon"] = "fas fa-expand";
+    styles["collapsedIcon"] = "fas fa-compress";
+    styles["table"] = "table is-striped is-bordered is-hoverable";
 
     // custom callbacks
     var callbacks = {};
@@ -82,9 +82,9 @@
         var controlEl = this.getControlEl();
 
         // all controls get the "form-control" class injected
-        $(fieldEl).find("input").addClass("form-control");
-        $(fieldEl).find("textarea").addClass("form-control");
-        $(fieldEl).find("select").addClass("form-control");
+        $(fieldEl).find("input").addClass("form-control input");
+        $(fieldEl).find("textarea").addClass("form-control input");
+        $(fieldEl).find("select").addClass("form-control input");
         // except for the following
         $(fieldEl).find("input[type=checkbox]").removeClass("form-control");
         $(fieldEl).find("input[type=file]").removeClass("form-control");
