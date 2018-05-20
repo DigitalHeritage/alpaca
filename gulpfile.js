@@ -145,7 +145,8 @@ var paths = {
             "src/js/views/web.js",
             "src/js/views/jqueryui.js",
             "src/js/views/jquerymobile.js",
-            "src/js/views/bootstrap.js"
+            "src/js/views/bootstrap.js",
+            "src/js/views/bulma.js"
         ],
         web: [
             "build/tmp/templates-web.js",
@@ -169,6 +170,12 @@ var paths = {
             "build/tmp/scripts-core.js",
             "src/js/views/web.js",
             "src/js/views/bootstrap.js"
+        ],
+        bulma: [
+            "build/tmp/templates-bulma.js",
+            "build/tmp/scripts-core.js",
+            "src/js/views/web.js",
+            "src/js/views/bulma.js"
         ]
     },
     templates: {
@@ -201,6 +208,14 @@ var paths = {
             "src/templates/bootstrap-edit/**/*.html",
             "src/templates/bootstrap-create/**/*.html"
         ],
+        bulma: [
+            "src/templates/web-display/**/*.html",
+            "src/templates/web-edit/**/*.html",
+            "src/templates/web-create/**/*.html",
+            "src/templates/bulma-display/**/*.html",
+            "src/templates/bulma-edit/**/*.html",
+            "src/templates/bulma-create/**/*.html"
+        ],
         all: [
             "src/templates/**/*.html"
         ]
@@ -218,6 +233,11 @@ var paths = {
             "src/css/alpaca-core.css",
             "src/css/alpaca-fields.css",
             "src/css/alpaca-bootstrap.css"
+        ],
+        bulma: [
+            "src/css/alpaca-core.css",
+            "src/css/alpaca-fields.css",
+            "src/css/alpaca-bulma.css"
         ],
         jquerymobile: [
             "src/css/alpaca-core.css",
@@ -290,6 +310,18 @@ gulp.task("build-templates", function(cb)
             .pipe(concat('templates-bootstrap.js'))
             .pipe(gulp.dest('build/tmp/')),
 
+        // bulma
+        gulp.src(paths.templates["bulma"])
+            .pipe(handlebars({ handlebars: require('handlebars') }))
+            .pipe(wrap('Handlebars.template(<%= contents %>)'))
+            .pipe(declare({
+                namespace: 'HandlebarsPrecompiled',
+                processName: processName,
+                noRedeclare: true
+            }))
+            .pipe(concat('templates-bulma.js'))
+            .pipe(gulp.dest('build/tmp/')),
+
         // jqueryui
         gulp.src(paths.templates["jqueryui"])
             .pipe(handlebars({ handlebars: require('handlebars') }))
@@ -357,6 +389,25 @@ gulp.task("build-scripts", function(cb) {
         exports: "Alpaca",
         template: wrapper,
         defaultView: 'bootstrap'
+    };
+    var bulma_wrap = {
+        deps: [{
+            "name": "jquery",
+            "globalName": "jQuery",
+            "paramName": "$"
+        }, {
+            "name": "handlebars",
+            "globalName": "Handlebars",
+            "paramName": "Handlebars"
+        }, {
+            "name": "bulma",
+            "globalName": "Bulma",
+            "paramName": "Bulma"
+        }],
+        namespace: "Alpaca",
+        exports: "Alpaca",
+        template: wrapper,
+        defaultView: 'bulma'
     };
     var jqueryui_warp = {
         deps: [{
@@ -431,6 +482,15 @@ gulp.task("build-scripts", function(cb) {
                 .pipe(concat('alpaca.min.js'))
                 .pipe(uglify())
                 .pipe(gulp.dest('build/alpaca/bootstrap')),
+            
+            // bulma
+            gulp.src(paths.scripts.bulma)
+                .pipe(concat('alpaca.js'))
+                .pipe(wrapUmd(bulma_wrap))
+                .pipe(gulp.dest('build/alpaca/bulma'))
+                .pipe(concat('alpaca.min.js'))
+                .pipe(uglify())
+                .pipe(gulp.dest('build/alpaca/bulma')),
 
             // jqueryui
             gulp.src(paths.scripts.jqueryui)
@@ -483,6 +543,16 @@ gulp.task("build-styles", function(cb) {
                 .pipe(gulp.dest('build/alpaca/bootstrap')),
             gulp.src("src/css/images/**")
                 .pipe(gulp.dest('./build/alpaca/bootstrap/images')),
+
+            // bulma
+            gulp.src(paths.styles.bulma)
+                .pipe(concat('alpaca.css'))
+                .pipe(gulp.dest('build/alpaca/bulma'))
+                .pipe(rename({suffix: ".min"}))
+                .pipe(minifyCss())
+                .pipe(gulp.dest('build/alpaca/bulma')),
+            gulp.src("src/css/images/**")
+                .pipe(gulp.dest('./build/alpaca/bulma/images')),
 
             // jqueryui
             gulp.src(paths.styles.jqueryui)
