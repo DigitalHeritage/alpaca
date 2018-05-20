@@ -399,10 +399,6 @@ gulp.task("build-scripts", function(cb) {
             "name": "handlebars",
             "globalName": "Handlebars",
             "paramName": "Handlebars"
-        }, {
-            "name": "bulma",
-            "globalName": "Bulma",
-            "paramName": "Bulma"
         }],
         namespace: "Alpaca",
         exports: "Alpaca",
