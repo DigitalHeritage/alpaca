@@ -57,5 +57,7 @@
     "wd": "*",
     "wrench": "*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^6.0.1"
+  }
 }
