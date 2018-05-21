@@ -1,0 +1,49 @@
+<script type="text/x-handlebars-template">
+<div>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+        {{#if options.label}}
+        <label class="label {{#if options.labelClass}}{{options.labelClass}}{{/if}} control-label alpaca-control-label" for="{{id}}">{{{options.label}}}</label>
+        {{/if}}
+        </div>
+
+        
+      <div class="field-body">
+        <div class="field">
+            {{#if options.helpers}}
+                {{#compare options.helpersPosition "above"}}
+                    {{#each options.helpers}}
+                    <p class="help-block {{#if options.helperClass}}{{options.helperClass}}{{/if}}">
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        {{#showMessage .}}{{/showMessage}}
+                    </p>
+                    {{/each}}
+                {{/compare}}
+            {{/if}}
+          <p class="control">
+            {{#control}}{{/control}}
+          </p>
+          {{#if options.helpers}}
+                {{#compare options.helpersPosition "below"}}
+                    {{#each options.helpers}}
+                        <p class="help-block {{#if options.helperClass}}{{options.helperClass}}{{/if}}">
+                            <i class="glyphicon glyphicon-info-sign"></i>
+                            {{#showMessage .}}{{/showMessage}}
+                        </p>
+                    {{/each}}
+                {{/compare}}
+            {{/if}}
+        </div>
+        {{#if options.renderButtons}}
+                {{#if options.buttons}}
+                <div class="alpaca-control-buttons-container">
+                    {{#each options.buttons}}
+                    <button data-key="{{@key}}" type="{{type}}" class="alpaca-control-button alpaca-control-button-{{@key}} {{styles}}" {{#each value}}{{@key}}="{{value}}" {{/each}}>{{{value}}}</button>
+                    {{/each}}
+                </div>
+                {{/if}}
+            {{/if}}
+      </div>
+    </div>
+</div>
+</script>

@@ -1,0 +1,39 @@
+<script type="text/x-handlebars-template">
+
+    <div>
+    {{#compare actionbarStyle "left"}}
+        <div class="is-pulled-left">
+            {{#arrayActionbar}}{{/arrayActionbar}}
+        </div>
+        <div>
+            {{#itemField}}{{/itemField}}
+        </div>
+        <div class="clear"></div>
+    {{else}}
+        {{#compare actionbarStyle "right"}}
+            <div >
+                {{#itemField}}{{/itemField}}
+            </div>
+            <div class="is-pulled-right">
+                {{#arrayActionbar}}{{/arrayActionbar}}
+            </div>
+            <div class="alpaca-clear"></div>
+        {{else}}
+            <div>
+
+                {{#compare actionbarStyle "top"}}
+                {{#arrayActionbar}}{{/arrayActionbar}}
+                {{/compare}}
+
+                {{#itemField}}{{/itemField}}
+
+                {{#compare actionbarStyle "bottom"}}
+                {{#arrayActionbar}}{{/arrayActionbar}}
+                {{/compare}}
+
+            </div>
+        {{/compare}}
+    {{/compare}}
+    </div>
+
+</script>
